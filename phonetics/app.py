@@ -1,6 +1,14 @@
 from flask import Flask
 
-from pages import *
+from phonetics import pages
+
+# @bp.route("/")
+# def home():
+#     return render_template("pages/home.html")
+
+# @bp.route("/about")
+# def about():
+#     return render_template("pages/about.html")
 
 class WSGILoggingMiddleware:
     def __init__(self, app):
@@ -13,7 +21,7 @@ class WSGILoggingMiddleware:
 def create_app():
     app = Flask(__name__)
     # app.wsgi_app = WSGILoggingMiddleware(app.wsgi_app)  # Applying WSGI middleware
-    app.register_blueprint(pages.bp)
+    # app.register_blueprint(pages.bp)
     return app
 
 
