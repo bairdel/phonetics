@@ -1,5 +1,5 @@
-from phonetics import create_app
+# from phonetics import create_app
 
-if "name" == "__main__":
-    app = create_app()
-    app.run()
+# if "name" == "__main__":
+#     app = create_app()
+#     app.run()
