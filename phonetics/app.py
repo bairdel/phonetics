@@ -1,6 +1,6 @@
 from flask import Flask
 
-from phonetics import pages
+from pages import *
 
 class WSGILoggingMiddleware:
     def __init__(self, app):
@@ -12,7 +12,7 @@ class WSGILoggingMiddleware:
 
 def create_app():
     app = Flask(__name__)
-    app.wsgi_app = WSGILoggingMiddleware(app.wsgi_app)  # Applying WSGI middleware
+    # app.wsgi_app = WSGILoggingMiddleware(app.wsgi_app)  # Applying WSGI middleware
     app.register_blueprint(pages.bp)
     return app
 
