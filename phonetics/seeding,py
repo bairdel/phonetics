@@ -1,0 +1,28 @@
+from phonetics.models import db, Phoneme, Word
+from flask_sqlalchemy import SQLAlchemy
+
+
+def seed_database(db):
+    # Clear existing data
+    db.drop_all()
+    db.create_all()
+
+    # Sample phonemes
+    phonemes = [
+        Phoneme(symbol='p', equivalent='p as in "pat"'),
+        Phoneme(symbol='b', equivalent='b as in "bat"'),
+        Phoneme(symbol='t', equivalent='t as in "tap"'),
+        Phoneme(symbol='d', equivalent='d as in "dog"'),
+    ]
+
+    # Sample words
+    words = [
+        Word(text='pat', initial='p', medial='æ', final='t'),
+        Word(text='bat', initial='b', medial='æ', final='t'),
+        Word(text='tap', initial='t', medial='æ', final='p'),
+        Word(text='dog', initial='d', medial='ɔ', final='g'),
+    ]
+
+    # Add to session and commit
+    db.session.add_all(phonemes + words)
+    db.session.commit()

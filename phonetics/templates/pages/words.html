@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Home{% endblock title %}</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <table>
+        <thead>
+        <th>Id</th>
+        </thead>
+        {% for data in words %}
+        <tbody>
+        <td>{{data.id}}</td>
+        </tbody>
+        {% endfor%}
+    </table>
+{% endblock content %}
