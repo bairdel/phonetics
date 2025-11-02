@@ -21,7 +21,7 @@ def create_app():
     from phonetics.routes import home_routes, word_routes
     from phonetics.models import db
     from phonetics.config import Config
-    from phonetics.seeding import seed_database
+    # from phonetics.seeding import seed_database
 
     app = Flask(__name__)
     app.register_blueprint(home_routes)
@@ -34,7 +34,7 @@ def create_app():
     db.init_app(app)
     with app.app_context():
         db.create_all()
-        seed_database(db)
+        # seed_database(db)
 
     return app
 
