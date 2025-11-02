@@ -11,5 +11,5 @@ EXPOSE 8080
 # Define environment variable
 # ENV FLASK_APP=app.py
 # Run app.py when the container launches
-# CMD ["flask", "run", "--host=0.0.0.0"]
-CMD ["gunicorn", "phonetics:app", "-bind=0.0.0.0:8080"]
+CMD ["python3", "-m", "flask", "--app", "phonetics" "run", "--host=0.0.0.0"]
+# CMD ["gunicorn", "phonetics:app", "-bind=0.0.0.0:8080"]
