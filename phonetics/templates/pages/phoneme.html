@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}          {{ phoneme.text }}
+{% endblock title %}</h2>
+{% endblock header %}
+
+{% block content %}
+          {% for word in words %}
+            <li>{{ word.text }}</li>
+            {% if word.initial %} {{word.initial}} {% endif %}
+            {% if word.medial %} {{word.medial}} {% endif %}
+            {% if word.final %} {{word.final}} {% endif %}
+          {% else %}
+            <p>No words with this phoneme.</p>
+          {% endfor %}
+{% endblock content %}

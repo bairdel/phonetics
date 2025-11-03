@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Phonetics{% endblock title %}</h2>
+{% endblock header %}
+{% block content %}
+
+
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+        {% for phonetic in phonetics %}
+
+          <li>
+        <a href="{{ url_for('word.phoneme_test', phoneme_text=phonetic.text) }}" class="link-dark rounded">
+          {{ phonetic.text }}
+        </a>
+      </li>
+  {% else %}
+    <p>No phonetics available.</p>
+  {% endfor %}
+    </ul>
+
+{% endblock content %}
