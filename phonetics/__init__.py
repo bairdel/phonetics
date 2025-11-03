@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
-
+import os
 
 
 # app = Flask(__name__)
@@ -22,6 +21,12 @@ def create_app():
     from phonetics.models import db
     from phonetics.config import Config
     # from phonetics.seeding import seed_database
+    from phonetics.seed_db import seed_database
+
+
+
+    # print(phonemes)
+
 
     app = Flask(__name__)
     app.register_blueprint(home_routes)
@@ -34,7 +39,7 @@ def create_app():
     db.init_app(app)
     with app.app_context():
         db.create_all()
-        # seed_database(db)
+        seed_database(db)
 
     return app
 

@@ -9,10 +9,12 @@
     <table>
         <thead>
         <th>Id</th>
+        <th>Text</th>
         </thead>
         {% for data in words %}
         <tbody>
         <td>{{data.id}}</td>
+        <td>{{data.text}}</td>
         </tbody>
         {% endfor%}
     </table>
