@@ -6,10 +6,10 @@ def from_file():
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     # Construct the path to the file in the parent directory
-    with open(dir_path + '\data\phonemes.csv', 'r') as f:
+    with open(dir_path + '/data/phonemes.csv', 'r') as f:
         header = f.readline()  # Skip header line
         phonemes = [line.strip() for line in f.readlines()]
-    with open(dir_path + '\data\words.csv', 'r') as f:
+    with open(dir_path + '/data/words.csv', 'r') as f:
         header = f.readline()  # Skip header line
         words = [line.strip() for line in f.readlines()]
 
