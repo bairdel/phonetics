@@ -8,4 +8,40 @@
   <p>
     Learn more about this project by visiting the <a href="{{ url_for('home.about') }}">About page</a>.
   </p>
+
+  <form method="post" action="{{ url_for('word.testing') }}">
+    <label for="age">Age of Child</label><br>
+    <select name="age" id="age">
+      {% for age in ages %}
+        <option value="{{ age }}">{{ age/10 }}</option>
+      {% endfor %}
+    </select><br>
+
+    <table>
+    {% for phoneme in phonemes %}
+    {% if loop.index % 4 == 0 %}
+      <tr>
+    {% endif %}
+    <td>
+    <label for="phoneme-{{phoneme.id}}">{{phoneme.text}}</label>
+    <input type="checkbox" id="phoneme-{{phoneme.id}}" name="phoneme-{{phoneme.id}}">
+    </td>
+
+    {% if loop.index % 4 == 0 %}
+      </tr>
+    {% endif %}
+    {% endfor %}
+    
+    </table>
+
+    <label for="allwords">All Words</label><br>
+    <label for="no">No</label>
+    <input type="radio" id="no" name="allwords" value="no" checked>
+    <label for="yes">Yes</label>
+    <input type="radio" id="yes" name="allwords" value="yes"><br><br>
+
+
+    <button type="submit">Submit</button>
+
+  </form>
 {% endblock content %}

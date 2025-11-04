@@ -8,7 +8,7 @@ class Phoneme(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(10), unique=True, nullable=False)
     text = db.Column(db.String(100), nullable=True)
-    age = db.Column(db.String(100), nullable=True)
+    child_age = db.Column(db.Integer, nullable=True)
 
 class Word(db.Model):
     __tablename__ = "words_table"
@@ -20,4 +20,5 @@ class Word(db.Model):
     initial_phoneme = db.Column(db.Integer, db.ForeignKey('phoneme_table.id'), nullable=True)
     medial_phoneme = db.Column(db.Integer, db.ForeignKey('phoneme_table.id'), nullable=True)
     final_phoneme = db.Column(db.Integer, db.ForeignKey('phoneme_table.id'), nullable=True)
-
+    image_credit = db.Column(db.String(500), nullable=True)
+    image_link = db.Column(db.String(500), nullable=True)

@@ -8,14 +8,70 @@
 
     <table>
         <thead>
-        <th>Id</th>
-        <th>Text</th>
+        <th>Words</th>
+        <th>image</th>
         </thead>
-        {% for data in words %}
         <tbody>
-        <td>{{data.id}}</td>
-        <td>{{data.text}}</td>
-        </tbody>
-        {% endfor%}
+          {% for word in words %}
+
+            {% if word.initial %} 
+                {% set red = [word.text.index(word.initial)] %}
+                {% for i in range((word.initial | length )-1) %}
+                    {% set red = red.append(red[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+
+            {% if word.medial %} 
+                {% set blue = [word.text.index(word.medial)] %}
+                {% for i in range((word.medial | length )-1) %}
+                    {% set blue = blue.append(blue[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+
+            {% if word.final %} 
+                {% set green = [word.text.index(word.final)] %}
+                {% for i in range((word.final | length )-1) %}
+                    {% set green = green.append(green[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+            <td>
+            <b>
+            {%- for letter in word.text -%}
+                {%- if loop.index0 in red -%}
+                    <span style="color: red;">{{- letter -}}</span>
+                {%- elif loop.index0 in blue -%}
+                    <span style="color: blue;">{{- letter -}}</span>
+                {%- elif loop.index0 in green -%}
+                    <span style="color: green;">{{- letter -}}</span>
+                {%- else %}
+                    {{- letter -}}
+                {%- endif -%}
+            {% endfor -%}
+            </b>
+                        </td>
+            <td>
+                {% if word.image_link and word.image_credit %}
+                    <a href="{{ word.image_link }}">
+                        <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                    </a>
+                    <br>
+                    <small>{{ word.image_credit | safe }}</small>
+                {% elif word.image_link %}
+                    <a href="{{ word.image_link }}">
+                        <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                    </a>
+                {% elif word.image_credit %}
+                    <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                    <br>
+                    <small>{{ word.image_credit | safe  }}</small>
+                {% else %}
+                    NO IMAGE
+                    <!-- <img src="{{ url_for('static', filename='images/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;"> -->
+                {% endif %}
+            </td>
+</tbody>
+          {% else %}
+            <p>No words with this phoneme.</p>
+          {% endfor %}
     </table>
 {% endblock content %}

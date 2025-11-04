@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Test{% endblock title %}</h2>
+{% endblock header %}
+
+Phonemes: 
+{% block content %}
+{% if phonemes|length >= 1 %}
+{% for p in phonemes %}
+{{ p.text }}
+{% endfor %}
+{% endif %}
+<br>
+{% if agerange|int > 0 %}
+Age: {{ agerange/10 }}
+{% endif %}
+<br>
+<form method="post" action="{{ url_for('word.results') }}">
+    {% for word in words %}
+        <label for="word_{{ word.id }}">
+            {% if word.image_link and word.image_credit %}
+                <a href="{{ word.image_link }}">
+                    <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                </a>
+                <br>
+                <small>{{ word.image_credit | safe }}</small>
+            {% elif word.image_link %}
+                <a href="{{ word.image_link }}">
+                    <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                </a>
+            {% elif word.image_credit %}
+                <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
+                <br>
+                <small>{{ word.image_credit | safe  }}</small>
+            {% else %}
+                NO IMAGE
+                <!-- <img src="{{ url_for('static', filename='images/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;"> -->
+            {% endif %}
+            <br>
+
+            {% if word.initial %} 
+                {% set red = [word.text.index(word.initial)] %}
+                {% for i in range((word.initial | length )-1) %}
+                    {% set red = red.append(red[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+
+            {% if word.medial %} 
+                {% set blue = [word.text.index(word.medial)] %}
+                {% for i in range((word.medial | length )-1) %}
+                    {% set blue = blue.append(blue[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+
+            {% if word.final %} 
+                {% set green = [word.text.index(word.final)] %}
+                {% for i in range((word.final | length )-1) %}
+                    {% set green = green.append(green[0] + loop.index) %}
+                {% endfor %}
+            {% endif %}
+            <b>
+            {%- for letter in word.text -%}
+                {%- if loop.index0 in red -%}
+                    <span style="color: red;">{{- letter -}}</span>
+                {%- elif loop.index0 in blue -%}
+                    <span style="color: blue;">{{- letter -}}</span>
+                {%- elif loop.index0 in green -%}
+                    <span style="color: green;">{{- letter -}}</span>
+                {%- else %}
+                    {{- letter -}}
+                {%- endif -%}
+            {% endfor -%}
+            </b>
+
+
+        
+        
+        </label><br>
+
+        <label for="word_{{ word.id }}">Correct or Not</label><br>
+        <label for="word_{{ word.id }}_no">Incorrect</label>
+        <input type="radio" id="word_{{ word.id }}_no" name="word_{{ word.id }}" value="no">
+        <label for="word_{{ word.id }}_yes">Correct</label>
+        <input type="radio" id="word_{{ word.id }}_yes" name="word_{{ word.id }}" value="yes"><br>
+
+        <label for="spelling">Child's Spelling: </label>
+        <input type="text" id="spelling" name="spelling">
+
+        <br><br>
+    {% endfor %}
+    <button type="submit">Submit</button>
+{% endblock content %}

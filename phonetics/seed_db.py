@@ -24,17 +24,23 @@ def seed_database(db):
 
     for p in phonemes:
         symbol, text, age = p.split(',')
-        phoneme = Phoneme(symbol=symbol, text=text, age=age)
+        if age and age != '?':
+            age = int(float(age)*10)
+        else:
+            age = 100
+        phoneme = Phoneme(symbol=symbol, text=text, child_age=age)
         db.session.add(phoneme)
     db.session.commit()
 
     
     for w in words:
         phonemes_ids = [None, None, None]
-        text, initial, medial, final, phonemes_ids[0], phonemes_ids[1], phonemes_ids[2]  = w.split(',')
+        text, initial, medial, final, phonemes_ids[0], phonemes_ids[1], phonemes_ids[2], image_credit, image_link  = w.split(',')
         phonemes_ids[0] = db.session.execute(db.select(Phoneme.id).where(Phoneme.symbol == phonemes_ids[0])).all()
         phonemes_ids[1] = db.session.execute(db.select(Phoneme.id).where(Phoneme.symbol == phonemes_ids[1])).all()
         phonemes_ids[2] = db.session.execute(db.select(Phoneme.id).where(Phoneme.symbol == phonemes_ids[2])).all()
+
+        
 
         for p in range(len(phonemes_ids)):
             if len(phonemes_ids[p]) > 0:
@@ -42,7 +48,7 @@ def seed_database(db):
             else:
                 phonemes_ids[p] = None
 
-        word = Word(text=text, initial=initial, medial=medial, final=final, initial_phoneme=phonemes_ids[0], medial_phoneme=phonemes_ids[1], final_phoneme=phonemes_ids[2])
+        word = Word(text=text, initial=initial, medial=medial, final=final, initial_phoneme=phonemes_ids[0], medial_phoneme=phonemes_ids[1], final_phoneme=phonemes_ids[2], image_credit=image_credit, image_link=image_link)
         db.session.add(word)
 
     # # Sample phonemes
