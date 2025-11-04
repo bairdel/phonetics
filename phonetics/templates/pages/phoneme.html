@@ -8,21 +8,21 @@
 {% block content %}
           {% for word in words %}
 
-            {% if word.text.index(word.initial) %} 
-                  {% set red = [word.text.index(word.initial)] %}
+            {% if word.initial %} 
+                {% set red = [word.text.index(word.initial)] %}
                 {% for i in range((word.initial | length )-1) %}
                     {% set red = red.append(red[0] + loop.index) %}
                 {% endfor %}
             {% endif %}
 
-            {% if word.text.index(word.medial) %} 
+            {% if word.medial %} 
                 {% set blue = [word.text.index(word.medial)] %}
                 {% for i in range((word.medial | length )-1) %}
                     {% set blue = blue.append(blue[0] + loop.index) %}
                 {% endfor %}
             {% endif %}
 
-            {% if word.text.index(word.final) %} 
+            {% if word.final %} 
                 {% set green = [word.text.index(word.final)] %}
                 {% for i in range((word.final | length )-1) %}
                     {% set green = green.append(green[0] + loop.index) %}

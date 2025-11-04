@@ -32,7 +32,10 @@ def phoneme_test(phoneme_text):
     words = Word.query.filter_by(initial_phoneme=phoneme.id).all()
     words += Word.query.filter_by(medial_phoneme=phoneme.id).all()
     words += Word.query.filter_by(final_phoneme=phoneme.id).all()
-    # print(words)
+
+    for w in words:
+        print(w.text)
+
     if phoneme:
         return render_template("pages/phoneme.html", phoneme=phoneme, words=words)
         # return f"Phoneme: {phoneme.symbol}, Text: {phoneme.text}, Age: {phoneme.age}"
