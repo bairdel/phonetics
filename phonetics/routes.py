@@ -138,7 +138,28 @@ def testing():
 @word_routes.route('/results', methods=['POST'])
 def results():
         # Get the form data as Python ImmutableDict datatype 
+    if not request.form:
+        return "Error"
+    
+    words = Word.query.all()
     data = request.form
     print(data)
+    data_list = []
+    for word in words:
+        word_id = str(word.id)
+        if ("word_" + word_id) in data:
+            temp_dict = {
+                "word_id" : word_id,
+                "word" : word,
+                "correct" : data['word_' + word_id],
+                "spelling" : data['spelling_' + word_id]
+            }
+            data_list.append(temp_dict)
+
+    print(data_list)
+
+    phonemes = Phoneme.query.all()
+
     ## Return the extracted information 
-    return render_template("pages/results.html")
+    # return data
+    return render_template("pages/results.html", data=data_list, phonemes=phonemes)

@@ -6,18 +6,54 @@
 
 Phonemes: 
 {% block content %}
+
+<script type="text/javascript">
+    
+function go(){
+document.getElementById('state0').style.display = "none";
+// document.getElementById('state0').scrollIntoView();
+}
+function showNext(divIdShow,divIdHide){
+    document.getElementById("word-" + divIdShow).style.display="block";
+
+    document.getElementById("word-" + divIdHide).style.display="none";
+    }
+function showPrevious(divIdShow,divIdHide){
+    document.getElementById("word-" + divIdShow).style.display="block";
+
+    document.getElementById("word-" + divIdHide).style.display="none";
+    }
+function showSpelling(spellingID){
+    document.getElementById("spellingbox_" + spellingID).style.display="block";
+
+    }
+function hideSpelling(spellingID){
+
+    document.getElementById("spellingbox_" + spellingID).style.display="none";
+    }
+</script>
+
+
+
 {% if phonemes|length >= 1 %}
-{% for p in phonemes %}
-{{ p.text }}
-{% endfor %}
+    {% for p in phonemes %}
+        {{ p.text }}
+    {% endfor %}
 {% endif %}
 <br>
 {% if agerange|int > 0 %}
-Age: {{ agerange/10 }}
+    Age: {{ agerange/10 }}
 {% endif %}
 <br>
-<form method="post" action="{{ url_for('word.results') }}">
+
+<form method="post" action="{{ url_for('word.results') }}" >
+    <div id="state0">
     {% for word in words %}
+        {% if loop.index == 1 %}
+        <div id="word-{{ loop.index }}" style="display: block;" >
+        {% else %}
+                <div id="word-{{ loop.index }}" style="display: none;">
+        {% endif %}
         <label for="word_{{ word.id }}">
             {% if word.image_link and word.image_credit %}
                 <a href="{{ word.image_link }}">
@@ -80,14 +116,29 @@ Age: {{ agerange/10 }}
 
         <!-- <label for="word_{{ word.id }}">Correct or Not</label><br> -->
         <label for="word_{{ word.id }}_no">Incorrect</label>
-        <input type="radio" id="word_{{ word.id }}_no" name="word_{{ word.id }}" value="no">
+        <input type="radio" id="word_{{ word.id }}_no" name="word_{{ word.id }}" value="no" onclick="showSpelling('{{ word.id}}')">
         <label for="word_{{ word.id }}_yes">Correct</label>
-        <input type="radio" id="word_{{ word.id }}_yes" name="word_{{ word.id }}" value="yes"><br>
+        <input type="radio" id="word_{{ word.id }}_yes" name="word_{{ word.id }}" value="yes" onclick="hideSpelling('{{ word.id}}')" checked="checked"><br>
 
-        <label for="spelling">Child's Spelling: </label>
-        <input type="text" id="spelling" name="spelling">
-
+        <div id="spellingbox_{{ word.id }}" style="display: none;">
+            <label for="spelling_{{ word.id }}">Child's Spelling: </label>
+            <input type="text" id="spelling" name="spelling_{{ word.id }}">
+        </div>
         <br><br>
+        {% if loop.index == 1 %}
+            <button type="button" value="showNext" onclick="showNext('{{ loop.index + 1 }}', '{{ loop.index }}')">Show Next</button>
+        {% elif loop.index == words|length %}
+            <button type="submit">Submit</button>
+            <!-- <button type="button" value="showPrevious" onclick="showPrevious('{{ loop.index - 1 }}', '{{ loop.index }}')">Show Previous</button> -->
+        {% else %}
+            <!-- <button type="button" value="showPrevious" onclick="showPrevious('{{ loop.index -1 }}', '{{ loop.index }}')">Show Previous</button> -->
+            <button type="button" value="showNext" onclick="showNext('{{ loop.index +1 }}', '{{ loop.index }}')">Show Next</button>
+        {% endif %}
+        <br>
+</div>
     {% endfor %}
-    <button type="submit">Submit</button>
+    </div>
+
+
+    
 {% endblock content %}
