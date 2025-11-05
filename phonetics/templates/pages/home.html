@@ -17,22 +17,29 @@
       {% endfor %}
     </select><br>
 
-    <table>
+    OR
+    <br>
+    <div>
+    {% set ns = namespace(curr_age=0) %}
+
     {% for phoneme in phonemes %}
-    {% if loop.index % 4 == 0 %}
-      <tr>
+    {% if phoneme.child_age != ns.curr_age %}
+      </div>
+      <div class="age-{{phoneme.child_age }} age_group">
+        Age: {{ phoneme.child_age/10}}
+        <br>
+      {% set ns.curr_age = phoneme.child_age %}
+
     {% endif %}
-    <td>
+
     <label for="phoneme-{{phoneme.id}}">{{phoneme.text}}</label>
     <input type="checkbox" id="phoneme-{{phoneme.id}}" name="phoneme-{{phoneme.id}}">
-    </td>
 
-    {% if loop.index % 4 == 0 %}
-      </tr>
-    {% endif %}
     {% endfor %}
-    
-    </table>
+      </div>
+    <br>
+    OR
+    <br>
 
     <label for="allwords">All Words</label><br>
     <label for="no">No</label>

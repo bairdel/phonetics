@@ -6,6 +6,13 @@
 {% endblock header %}
 
 {% block content %}
+  <form method="post" action="{{ url_for('word.testing') }}">
+    <input type="checkbox" id="phoneme-{{phoneme.id}}" name="phoneme-{{phoneme.id}}" hidden checked=checked>
+
+    <button type="submit">Test this phonetic</button>
+
+  </form>
+  <br>
           {% for word in words %}
 
             {% if word.initial %} 

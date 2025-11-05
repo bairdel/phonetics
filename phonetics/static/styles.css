@@ -42,3 +42,9 @@ body {
     overflow-x: hidden;
 }
 
+.age_group {
+  width: 200px;
+  border: 2px solid green;
+  padding: 5px;
+  margin: 10px;
+}

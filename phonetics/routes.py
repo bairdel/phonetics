@@ -55,8 +55,12 @@ def testing():
     allwords = False
     
     all_phonemes = Phoneme.query.all()
+    all_phonemes = sorted(all_phonemes, key=lambda p: p.text, reverse=False)
+    all_phonemes = sorted(all_phonemes, key=lambda p: p.child_age, reverse=False)
+
     if request.form:
         data = request.form
+        print(data)
         if 'age' in data:
             age = int(data['age'])
         else: 
@@ -65,8 +69,9 @@ def testing():
         for i in range(len(all_phonemes)):
             if "phoneme-" + str(all_phonemes[i].id) in data:
                 phoneme.append(all_phonemes[i])
+
         if 'allwords' in data:
-            if data['allwords'] == 'on':
+            if data['allwords'] == 'yes':
                 allwords = True
             else:
                 allwords = False
@@ -74,37 +79,56 @@ def testing():
         # if not entered from a form
         age = 0
         phoneme = []
-        allwords = False
+        allwords = True
 
     # if phonemes selected disregard age selection
     if len(phoneme) > 0:
         age = 0
 
+
+
     words = []
 
     if allwords:
-        words += Word.query.all()
+        # words += Word.query.all()
+        phoneme = all_phonemes
+        for p in phoneme: 
+            words += Word.query.filter_by(initial_phoneme=p.id).all()
+            words += Word.query.filter_by(medial_phoneme=p.id).all()
+            words += Word.query.filter_by(final_phoneme=p.id).all()
+        age = 0
+
     elif len(phoneme) == 1:
+        # one phoneme selected
+        for p in phoneme:
         # phoneme = Phoneme.query.filter_by(text=phoneme).first()
-        words += Word.query.filter_by(initial_phoneme=phoneme.id).all()
-        words += Word.query.filter_by(medial_phoneme=phoneme.id).all()
-        words += Word.query.filter_by(final_phoneme=phoneme.id).all()
+            words += Word.query.filter_by(initial_phoneme=p.id).all()
+            words += Word.query.filter_by(medial_phoneme=p.id).all()
+            words += Word.query.filter_by(final_phoneme=p.id).all()
     elif len(phoneme) > 1:
+        # group of phonemes selected
         for p in phoneme:
             # phoneme = Phoneme.query.filter_by(text=phoneme).first()
             words += Word.query.filter_by(initial_phoneme=p.id).all()
             words += Word.query.filter_by(medial_phoneme=p.id).all()
             words += Word.query.filter_by(final_phoneme=p.id).all()
     elif age > 0:
+        # no phonemes selected so base on age selected
         phoneme = Phoneme.query.filter(Phoneme.child_age <= age).all()
         for p in phoneme:
-            print(p.text)
             words += Word.query.filter_by(initial_phoneme=p.id).all()
             words += Word.query.filter_by(medial_phoneme=p.id).all()
             words += Word.query.filter_by(final_phoneme=p.id).all()
     else:
-        words += Word.query.all()
+        # nothing selected so default to all words
+        # words += Word.query.all()
+        phoneme = all_phonemes
+        for p in phoneme: 
+            words += Word.query.filter_by(initial_phoneme=p.id).all()
+            words += Word.query.filter_by(medial_phoneme=p.id).all()
+            words += Word.query.filter_by(final_phoneme=p.id).all()
 
+    # remove duplicates maintain order
     res = []
     [res.append(val) for val in words if val not in res]
     words = res
