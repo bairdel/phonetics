@@ -2,9 +2,20 @@
 
 {% block header %}
   <h2>{% block title %}Test{% endblock title %}</h2>
+ Phonetics <br>
+{% if phonemes|length >= 1 %}
+    {% for p in phonemes %}
+        {{ p.text }}
+    {% endfor %}
+{% endif %}
+<br>
+{% if agerange|int > 0 %}
+    Age: {{ agerange/10 }}
+{% endif %}
+<br>
+
 {% endblock header %}
 
-Phonemes: 
 {% block content %}
 
 <script type="text/javascript">
@@ -31,85 +42,56 @@ function hideSpelling(spellingID){
 
     document.getElementById("spellingbox_" + spellingID).style.display="none";
     }
-function showWord(wordID){
-        document.getElementById("word_" + wordID).style.display="block";
-        document.getElementById("show_word_" + wordID).style.display="none";
-
-    }
 
 </script>
-
-
-{% if phonemes|length >= 1 %}
-    {% for p in phonemes %}
-        {{ p.text }}
-    {% endfor %}
-{% endif %}
-<br>
-{% if agerange|int > 0 %}
-    Age: {{ agerange/10 }}
-{% endif %}
-<br>
 
 <form method="post" action="{{ url_for('word.results') }}" >
     <div id="state0">
     {% for word in words %}
-
         {% if loop.index == 1 %}
-        <div id="word-{{ loop.index }}" style="display: block;" >
-            
+            <div id="word-{{ loop.index }}" style="display: block;" >
         {% else %}
-                <div id="word-{{ loop.index }}" style="display: none;">
+            <div id="word-{{ loop.index }}" style="display: none;">
         {% endif %}
+        <div id="testingblock1">
+
         {{ loop.index }} out of {{ words|length }}
 
-        <div class="testing-image" >
-        <label for="word_{{ word.id }}">
-            <img src="{{ url_for('static', filename='images/words/' + word.text + '.png') }}" alt="{{ word.text }}" style="max-height: 500px; max-width: 500px; display: block;">
-
-
-        </div>
-            <div class="testing-word">
-            <button type="button" id="show_word_{{word.id}}" onclick="showWord('{{ word.id}}')" style="display: block;">Show Word</button>
-
-            <div  id="word_{{word.id}}" style="display: none;">
-                {{ colourText(word) }}
-
+            <div class="testing-image" >
+                <label for="word_{{ word.id }}">
+                <img src="{{ url_for('static', filename='images/words/' + word.text + '.png') }}" alt="{{ word.text }}" style="max-height: 500px; max-width: 500px; display: block;">
+                </label>
             </div>
+            <div class="testing-word" id="word_{{word.id}}">
+                    {{ colourText(word) }}
             </div>
-        
-        
-        </label><br>
-
-        <div class="testing-radio">
-        <!-- <label for="word_{{ word.id }}">Correct or Not</label><br> -->
-        <label for="radio_{{ word.id }}_no">Incorrect</label>
-        <input type="radio" id="radio_{{ word.id }}_no" name="radio_{{ word.id }}" value="no" onclick="showSpelling('{{ word.id}}')">
-        <label for="radio_{{ word.id }}_yes">Correct</label>
-        <input type="radio" id="radio_{{ word.id }}_yes" name="radio_{{ word.id }}" value="yes" onclick="hideSpelling('{{ word.id}}')" ><br>
-        <input type="radio" id="radio_{{ word.id }}_none" name="radio_{{word.id}}" value="none" hidden checked="checked">
-
-        <div id="spellingbox_{{ word.id }}" style="display: none;">
-            <label for="spelling_{{ word.id }}">Child's Spelling: </label>
-            <input type="text" id="spelling" name="spelling_{{ word.id }}">
         </div>
-        </div>
-        <br><br>
+        
+        <div id="testingblock2">
+            <div class="testing-radio">
+                <label for="radio_{{ word.id }}_no">Incorrect</label>
+                <input type="radio" id="radio_{{ word.id }}_no" name="radio_{{ word.id }}" value="no" onclick="showSpelling('{{ word.id}}')">
+                <label for="radio_{{ word.id }}_yes">Correct</label>
+                <input type="radio" id="radio_{{ word.id }}_yes" name="radio_{{ word.id }}" value="yes" onclick="hideSpelling('{{ word.id}}')" ><br>
+                <input type="radio" id="radio_{{ word.id }}_none" name="radio_{{word.id}}" value="none" hidden checked="checked">
 
-        <div class="testing-buttons">
-         {% if loop.index != words|length %}
-            <button type="button" value="showNext" onclick="showNext('{{ loop.index +1 }}', '{{ loop.index }}')">Show Next</button>
+                <div id="spellingbox_{{ word.id }}" style="display: none;">
+                    <label for="spelling_{{ word.id }}">Child's Answer: </label>
+                    <input type="text" id="spelling" name="spelling_{{ word.id }}">
+                </div>
+            </div>
 
+            <div class="testing-buttons">
+            {% if loop.index != words|length %}
+                <button type="button" value="showNext" class="button" onclick="showNext('{{ loop.index +1 }}', '{{ loop.index }}')">Show Next</button>
             {% endif %}
-            <button type="submit">Complete Assessment</button>
+                <button type="submit" class="button">Complete Assessment</button>
+            </div>
         </div>
-
-        <br>
-</div>
+        </div>
     {% endfor %}
 
     </div>
-
 
     
 {% endblock content %}

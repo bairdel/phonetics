@@ -2,53 +2,65 @@
 
 {% block header %}
   <h2>{% block title %}Home{% endblock title %}</h2>
+  <p>Pick one of the 3 options to test for: </p>
 {% endblock header %}
 
 {% block content %}
-  <p>
-    Learn more about this project by visiting the <a href="{{ url_for('home.about') }}">About page</a>.
-  </p>
 
   <form method="post" action="{{ url_for('word.testing') }}">
-    <label for="age">Age of Child</label><br>
-    <select name="age" id="age">
-      {% for age in ages %}
-        <option value="{{ age }}">{{ age/10 }}</option>
-      {% endfor %}
-    </select><br>
+    <div class="container">
+  <div class="row">
+    <div id="block1" class="col-sm home-block">
+      <label for="age">Age of Child</label><br>
+      <select name="age" id="age">
+        {% for age in ages %}
+          <option value="{{ age }}">{{ age/10 }}</option>
+        {% endfor %}
+      </select>   
+    </div>
 
-    OR
-    <br>
-    <div>
-    {% set ns = namespace(curr_age=0) %}
 
-    {% for phoneme in phonemes %}
-    {% if phoneme.child_age != ns.curr_age %}
+    <div id="block2" class="col-sm-8 home-block">
+      <div class="container">
+        <div class="row">
+          <div>
+            {% set ns = namespace(curr_age=0) %}
+
+            {% for phoneme in phonemes %}
+              {% if phoneme.child_age != ns.curr_age %}
+                </div>
+                <div class="age-{{phoneme.child_age }} age_group col" style="min-width: 200px;">
+                  Age: {{ phoneme.child_age/10}}
+                  <br>
+                {% set ns.curr_age = phoneme.child_age %}
+
+              {% endif %}
+
+            <label for="phoneme-{{phoneme.id}}">{{phoneme.text}}</label>
+            <input type="checkbox" id="phoneme-{{phoneme.id}}" name="phoneme-{{phoneme.id}}">
+
+            {% endfor %}
+          </div>
+        </div>
       </div>
-      <div class="age-{{phoneme.child_age }} age_group">
-        Age: {{ phoneme.child_age/10}}
-        <br>
-      {% set ns.curr_age = phoneme.child_age %}
+    </div>    
 
-    {% endif %}
+    <div id="block3" class="col-sm home-block">
+        <label for="allwords">All Words</label><br>
+        <label for="no">No</label>
+        <input type="radio" id="no" name="allwords" value="no" checked>
+        <label for="yes">Yes</label>
+        <input type="radio" id="yes" name="allwords" value="yes"><br><br>
+    </div>
+    </div>
 
-    <label for="phoneme-{{phoneme.id}}">{{phoneme.text}}</label>
-    <input type="checkbox" id="phoneme-{{phoneme.id}}" name="phoneme-{{phoneme.id}}">
+    <div class="row">
 
-    {% endfor %}
+      <div id="block4" class="col-sm-12">
+      <button type="submit" >Submit</button>
       </div>
-    <br>
-    OR
-    <br>
-
-    <label for="allwords">All Words</label><br>
-    <label for="no">No</label>
-    <input type="radio" id="no" name="allwords" value="no" checked>
-    <label for="yes">Yes</label>
-    <input type="radio" id="yes" name="allwords" value="yes"><br><br>
-
-
-    <button type="submit">Submit</button>
+    </div>
+    </div>
 
   </form>
 {% endblock content %}

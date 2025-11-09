@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Home{% endblock title %}</h2>
+  <h2>{% block title %}All Words{% endblock title %}</h2>
 {% endblock header %}
 
 {% block content %}
@@ -17,6 +17,7 @@
             <td>
                 <img src="{{ url_for('static', filename='images/words/' + word.text + '.png') }}" alt="{{ word.text }}" style="max-height: 500px; max-width: 500px;">
                 {% if word.image_credit %}
+                <br>
                     <small>{{ word.image_credit.strip('"') | safe  }}</small>
                 {% endif %}
             </td>

@@ -2,6 +2,7 @@
 
 {% block header %}
   <h2>{% block title %}Results{% endblock title %}</h2>
+  <p id="datetime"></p>
 {% endblock header %}
 
 {% block content %}
@@ -24,12 +25,10 @@ window.onload = function() {
 </script>
 
 
-<p id="datetime"></p>
 <h2>Incorrect Words</h2>
 <table border="2" cellpadding="5" cellspacing="5">
     <thead>
         <th>Word</th>
-        <th>Result</th>
         <th>Spelling</th>
         <th>Initial</th>
         <th>Medial</th>
@@ -40,7 +39,6 @@ window.onload = function() {
 {% if word['correct'] == "no"%}
 <tr>
     <td>{{ colourText(word['word']) }}</td>
- <td>{{ word['correct']}}</td>
  <td>{{ word['spelling']}}</td>
  <td>{% if phonemes[word['word'].initial_phoneme] %}
     <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].initial_phoneme].text) }}" target="_blank" class="link-dark rounded">

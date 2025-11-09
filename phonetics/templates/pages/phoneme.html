@@ -13,10 +13,23 @@
 
   </form>
   <br>
+     <table>
+        <thead>
+        <th>Words</th>
+        <th>Image</th>
+        </thead>
+        <tbody>
           {% for word in words %}
-          <li>{{ colourText(word) }}</li>
-
+            <td>{{colourText(word)}}</td>
+            <td>
+                <img src="{{ url_for('static', filename='images/words/' + word.text + '.png') }}" alt="{{ word.text }}" style="max-height: 500px; max-width: 500px;">
+                {% if word.image_credit %}
+                    <small>{{ word.image_credit.strip('"') | safe  }}</small>
+                {% endif %}
+            </td>
+</tbody>
           {% else %}
             <p>No words with this phoneme.</p>
           {% endfor %}
+    </table>
 {% endblock content %}
