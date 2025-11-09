@@ -10,8 +10,8 @@
 - show words by phonetic - DONE
 - form that goes through words - DONE
 - multiple pathways into form - DONE
-- Form goes through each word at a time
-- result of form, display words wrong 
+- Form goes through each word at a time - DONE
+- result of form, display words wrong - IN PROGRESS
 - link to phonetics struggling with
 
 # Website Design

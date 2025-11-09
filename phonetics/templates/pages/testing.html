@@ -31,8 +31,13 @@ function hideSpelling(spellingID){
 
     document.getElementById("spellingbox_" + spellingID).style.display="none";
     }
-</script>
+function showWord(wordID){
+        document.getElementById("word_" + wordID).style.display="block";
+        document.getElementById("show_word_" + wordID).style.display="none";
 
+    }
+
+</script>
 
 
 {% if phonemes|length >= 1 %}
@@ -49,94 +54,60 @@ function hideSpelling(spellingID){
 <form method="post" action="{{ url_for('word.results') }}" >
     <div id="state0">
     {% for word in words %}
+
         {% if loop.index == 1 %}
         <div id="word-{{ loop.index }}" style="display: block;" >
+            
         {% else %}
                 <div id="word-{{ loop.index }}" style="display: none;">
         {% endif %}
+        {{ loop.index }} out of {{ words|length }}
+
+        <div class="testing-image" >
         <label for="word_{{ word.id }}">
-            {% if word.image_link and word.image_credit %}
-                <a href="{{ word.image_link }}">
-                    <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
-                </a>
-                <br>
-                <small>{{ word.image_credit | safe }}</small>
-            {% elif word.image_link %}
-                <a href="{{ word.image_link }}">
-                    <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
-                </a>
-            {% elif word.image_credit %}
-                <img src="{{ url_for('static', filename='images/words/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;">
-                <br>
-                <small>{{ word.image_credit | safe  }}</small>
-            {% else %}
-                NO IMAGE
-                <!-- <img src="{{ url_for('static', filename='images/' + word.text + '.jpg') }}" alt="{{ word.text }}" style="max-height: 100px;"> -->
-            {% endif %}
-            <br>
-
-            {% if word.initial %} 
-                {% set red = [word.text.index(word.initial)] %}
-                {% for i in range((word.initial | length )-1) %}
-                    {% set red = red.append(red[0] + loop.index) %}
-                {% endfor %}
-            {% endif %}
-
-            {% if word.medial %} 
-                {% set blue = [word.text.index(word.medial)] %}
-                {% for i in range((word.medial | length )-1) %}
-                    {% set blue = blue.append(blue[0] + loop.index) %}
-                {% endfor %}
-            {% endif %}
-
-            {% if word.final %} 
-                {% set green = [word.text.index(word.final)] %}
-                {% for i in range((word.final | length )-1) %}
-                    {% set green = green.append(green[0] + loop.index) %}
-                {% endfor %}
-            {% endif %}
-            <b>
-            {%- for letter in word.text -%}
-                {%- if loop.index0 in red -%}
-                    <span style="color: red;">{{- letter -}}</span>
-                {%- elif loop.index0 in blue -%}
-                    <span style="color: blue;">{{- letter -}}</span>
-                {%- elif loop.index0 in green -%}
-                    <span style="color: green;">{{- letter -}}</span>
-                {%- else %}
-                    {{- letter -}}
-                {%- endif -%}
-            {% endfor -%}
-            </b>
+            <img src="{{ url_for('static', filename='images/words/' + word.text + '.png') }}" alt="{{ word.text }}" style="max-height: 500px; max-width: 500px; display: block;">
 
 
+        </div>
+            <div class="testing-word">
+            <button type="button" id="show_word_{{word.id}}" onclick="showWord('{{ word.id}}')" style="display: block;">Show Word</button>
+
+            <div  id="word_{{word.id}}" style="display: none;">
+                {{ colourText(word) }}
+
+            </div>
+            </div>
         
         
         </label><br>
 
+        <div class="testing-radio">
         <!-- <label for="word_{{ word.id }}">Correct or Not</label><br> -->
-        <label for="word_{{ word.id }}_no">Incorrect</label>
-        <input type="radio" id="word_{{ word.id }}_no" name="word_{{ word.id }}" value="no" onclick="showSpelling('{{ word.id}}')">
-        <label for="word_{{ word.id }}_yes">Correct</label>
-        <input type="radio" id="word_{{ word.id }}_yes" name="word_{{ word.id }}" value="yes" onclick="hideSpelling('{{ word.id}}')" checked="checked"><br>
+        <label for="radio_{{ word.id }}_no">Incorrect</label>
+        <input type="radio" id="radio_{{ word.id }}_no" name="radio_{{ word.id }}" value="no" onclick="showSpelling('{{ word.id}}')">
+        <label for="radio_{{ word.id }}_yes">Correct</label>
+        <input type="radio" id="radio_{{ word.id }}_yes" name="radio_{{ word.id }}" value="yes" onclick="hideSpelling('{{ word.id}}')" ><br>
+        <input type="radio" id="radio_{{ word.id }}_none" name="radio_{{word.id}}" value="none" hidden checked="checked">
 
         <div id="spellingbox_{{ word.id }}" style="display: none;">
             <label for="spelling_{{ word.id }}">Child's Spelling: </label>
             <input type="text" id="spelling" name="spelling_{{ word.id }}">
         </div>
+        </div>
         <br><br>
-        {% if loop.index == 1 %}
-            <button type="button" value="showNext" onclick="showNext('{{ loop.index + 1 }}', '{{ loop.index }}')">Show Next</button>
-        {% elif loop.index == words|length %}
-            <button type="submit">Submit</button>
-            <!-- <button type="button" value="showPrevious" onclick="showPrevious('{{ loop.index - 1 }}', '{{ loop.index }}')">Show Previous</button> -->
-        {% else %}
-            <!-- <button type="button" value="showPrevious" onclick="showPrevious('{{ loop.index -1 }}', '{{ loop.index }}')">Show Previous</button> -->
+
+        <div class="testing-buttons">
+         {% if loop.index != words|length %}
             <button type="button" value="showNext" onclick="showNext('{{ loop.index +1 }}', '{{ loop.index }}')">Show Next</button>
-        {% endif %}
+
+            {% endif %}
+            <button type="submit">Complete Assessment</button>
+        </div>
+
         <br>
 </div>
     {% endfor %}
+
     </div>
 
 

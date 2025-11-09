@@ -143,23 +143,27 @@ def results():
     
     words = Word.query.all()
     data = request.form
-    print(data)
+    # print(data)
     data_list = []
     for word in words:
         word_id = str(word.id)
-        if ("word_" + word_id) in data:
-            temp_dict = {
-                "word_id" : word_id,
-                "word" : word,
-                "correct" : data['word_' + word_id],
-                "spelling" : data['spelling_' + word_id]
-            }
-            data_list.append(temp_dict)
+        if ("radio_" + word_id) in data:
+            if data['radio_' + word_id] != 'none':
+                temp_dict = {
+                    "word_id" : word_id,
+                    "word" : word,
+                    "correct" : data['radio_' + word_id],
+                    "spelling" : data['spelling_' + word_id]
+                }
+                data_list.append(temp_dict)
 
     print(data_list)
 
     phonemes = Phoneme.query.all()
+    phonemes_dict = {}
+    for p in phonemes:
+        phonemes_dict[p.id] = p
 
     ## Return the extracted information 
     # return data
-    return render_template("pages/results.html", data=data_list, phonemes=phonemes)
+    return render_template("pages/results.html", data=data_list, phonemes=phonemes_dict)

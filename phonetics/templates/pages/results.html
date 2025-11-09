@@ -5,36 +5,105 @@
 {% endblock header %}
 
 {% block content %}
-<table>
+<script src="html2pdf.bundle.min.js"></script>
+
+<script type="text/javascript">
+
+window.onload = function() {
+    var date = new Date();
+    var displayDate = date.toLocaleDateString();
+    var displayTime = date.toLocaleTimeString();
+
+    document.getElementById('datetime').innerHTML = displayDate + " " + displayTime;
+}
+
+// function save(){
+//     var element = document.getElementById('body');
+//     html2pdf().from(element).save('filename.pdf');
+// };
+</script>
+
+
+<p id="datetime"></p>
+<h2>Incorrect Words</h2>
+<table border="2" cellpadding="5" cellspacing="5">
     <thead>
         <th>Word</th>
         <th>Result</th>
         <th>Spelling</th>
+        <th>Initial</th>
+        <th>Medial</th>
+        <th>Final</th>
     </thead>
     <tbody>
 {% for word in data %}
 {% if word['correct'] == "no"%}
 <tr>
-    <td>{{ word['word'].text}}</td>
+    <td>{{ colourText(word['word']) }}</td>
  <td>{{ word['correct']}}</td>
  <td>{{ word['spelling']}}</td>
- <td>{{ word['word'].initial_phoneme }}</td>
+ <td>{% if phonemes[word['word'].initial_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].initial_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].initial_phoneme].text }}</a>
+          {% endif %}
+ </td>
+  <td>{% if phonemes[word['word'].medial_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].medial_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].medial_phoneme].text }}</a>
+    {% endif %}
+ </td>
+  <td>{% if phonemes[word['word'].final_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].final_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].final_phoneme].text }}</a>
+          {% endif %}
+ </td>
 </tr>
 {% endif %}
 {% endfor %}
 </tbody>
 </table>
 
-<br>
------------------------------
-<br>
-<table>
+<h2>Correct Words</h2>
+<table border="2" cellpadding="5" cellspacing="5">
+    <thead>
+        <th>Word</th>
+        <th>Initial</th>
+        <th>Medial</th>
+        <th>Final</th>
+    </thead>
+    <tbody>
 {% for word in data %}
+{% if word['correct'] == "yes"%}
 <tr>
-    <td>{{ word['word'].text}}</td>
- <td>{{ word['correct']}}</td>
- <td>{{ word['spelling']}}</td>
+    <td>{{ colourText(word['word'])}}</td>
+     <td>{% if phonemes[word['word'].initial_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].initial_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].initial_phoneme].text }}</a>
+          {% endif %}
+ </td>
+  <td>{% if phonemes[word['word'].medial_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].medial_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].medial_phoneme].text }}</a>
+    {% endif %}
+ </td>
+  <td>{% if phonemes[word['word'].final_phoneme] %}
+    <a href="{{ url_for('word.phoneme_test', phoneme_text=phonemes[word['word'].final_phoneme].text) }}" target="_blank" class="link-dark rounded">
+          {{ phonemes[word['word'].final_phoneme].text }}</a>
+          {% endif %}
+ </td>
 </tr>
+{% endif %}
 {% endfor %}
+</tbody>
 </table>
+<br>
+<!-- <button type="button" id="savebutton" onclick="save()" >Save Results</button> -->
+<button type="button" onclick="window.print();return false;">Print Results</button>
+
 {% endblock content %}
+
+
+Save Results
+
+Test All Incorrect Phonemes
+

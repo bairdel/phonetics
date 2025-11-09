@@ -9,8 +9,42 @@
 <h1>Articulation Screener</h1>
 {% include("_navigation.html") %}
 
+{% macro colourText(word) %}
+  {% if word.initial %} 
+      {% set red = [word.text.index(word.initial)] %}
+      {% for i in range((word.initial | length )-1) %}
+          {% set red = red.append(red[0] + loop.index) %}
+      {% endfor %}
+  {% endif %}
 
+  {% if word.medial %} 
+      {% set blue = [word.text.index(word.medial)] %}
+      {% for i in range((word.medial | length )-1) %}
+          {% set blue = blue.append(blue[0] + loop.index) %}
+      {% endfor %}
+  {% endif %}
 
+  {% if word.final %} 
+      {% set green = [word.text.index(word.final)] %}
+      {% for i in range((word.final | length )-1) %}
+          {% set green = green.append(green[0] + loop.index) %}
+      {% endfor %}
+  {% endif %}
+  <b>
+  {%- for letter in word.text -%}
+      {%- if loop.index0 in red -%}
+          <span style="color: red;">{{- letter -}}</span>
+      {%- elif loop.index0 in blue -%}
+          <span style="color: blue;">{{- letter -}}</span>
+      {%- elif loop.index0 in green -%}
+          <span style="color: green;">{{- letter -}}</span>
+      {%- else %}
+          {{- letter -}}
+      {%- endif -%}
+  {% endfor -%}
+  </b>
+
+{% endmacro %}
 
     <main>
         <header>

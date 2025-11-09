@@ -1,19 +1,19 @@
 ﻿text,initial,medial,final,initial_phoneme,medial_phoneme,final_phoneme,image_credit,image_link
-apple,,pp,,,p,,,
-balloon,b,ll,n,b,l,n,,
-beach,b,,ch,b,,ʧ,,
-bed,b,,d,b,,d,,
-blue,b,l,,b,l,,,
-boat,b,,t,b,,t,,
-book,b,,k,b,,k,,
-bus,b,,s,b,,s,,
-cap,c,,p,k,,p,,
-car,c,,,k,,,,
-cat,c,,t,k,,t,,
-chair,ch,,,ʧ,,,,
-chicken,ch,k,,ʧ,k,,,
-cow,c,,,k,,,,
-dog,d,,g,d,,g,,
+apple,,pp,,,p,,"Image by <a href=""https://pixabay.com/users/torybyy-429117/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=439397"">冰韵 汤</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=439397"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/09/08/18/14/apple-439397_960_720.png
+balloon,b,ll,n,b,l,n,"Image by <a href=""https://pixabay.com/users/eommina-1183101/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2070656"">eommina</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2070656"">Pixabay</a>",https://cdn.pixabay.com/photo/2017/02/16/07/15/balloon-2070656_960_720.png
+beach,b,,ch,b,,ʧ,"Image by <a href=""https://pixabay.com/users/bytrangle-6596164/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3121393"">Trang Le</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3121393"">Pixabay</a>",https://cdn.pixabay.com/photo/2018/01/31/16/12/beach-3121393_960_720.png
+bed,b,,d,b,,d,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=312424"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=312424"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/04/03/11/52/bed-312424_960_720.png
+blue,b,l,,b,l,,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=296489"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=296489"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/03/25/15/19/splatter-296489_960_720.png
+boat,b,,t,b,,t,"Image by <a href=""https://pixabay.com/users/khirulislam898-12875647/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4332866"">MD KHIRUL ISLAM</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4332866"">Pixabay</a>",https://cdn.pixabay.com/photo/2019/07/12/13/35/boat-4332866_960_720.png
+book,b,,k,b,,k,"Image by <a href=""https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=147292"">OpenClipart-Vectors</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=147292"">Pixabay</a>",https://cdn.pixabay.com/photo/2013/07/12/13/47/book-147292_960_720.png
+bus,b,,s,b,,s,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=309718"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=309718"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/04/03/10/03/bus-309718_960_720.png
+cap,c,,p,k,,p,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=25758"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=25758"">Pixabay</a>",https://cdn.pixabay.com/photo/2012/04/05/01/45/hat-25758_960_720.png
+car,c,,,k,,,"Image by <a href=""https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=155267"">OpenClipart-Vectors</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=155267"">Pixabay</a>",https://cdn.pixabay.com/photo/2013/07/13/01/11/passenger-car-155267_960_720.png
+cat,c,,t,k,,t,"Image by <a href=""https://pixabay.com/users/robert_kyriakis-3429391/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2982230"">Robert Kyriakis</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2982230"">Pixabay</a>",https://cdn.pixabay.com/photo/2017/11/27/21/07/siam-2982230_960_720.png
+chair,ch,,,ʧ,,,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=308688"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=308688"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/04/03/00/33/chair-308688_960_720.png
+chicken,ch,k,,ʧ,k,,"Image by <a href=""https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=159496"">OpenClipart-Vectors</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=159496"">Pixabay</a>",https://cdn.pixabay.com/photo/2013/07/13/12/15/chicken-159496_960_720.png
+cow,c,,,k,,,"Image by <a href=""https://pixabay.com/users/grafikacesky-947552/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1204968"">grafikacesky</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1204968"">Pixabay</a>",https://cdn.pixabay.com/photo/2016/02/17/12/26/cow-1204968_960_720.png
+dog,d,,g,d,,g,"Image by <a href=""https://pixabay.com/users/gwennhyfar-6697213/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2923490"">Jennifer R.</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2923490"">Pixabay</a>",https://cdn.pixabay.com/photo/2017/11/06/12/22/dog-2923490_960_720.png
 doll,d,,ll,d,,l,,
 dress,d,,ss,d,,s,,
 duck,d,,k,d,,k,,
@@ -37,7 +37,7 @@ house,h,,s,h,,s,,
 jelly,j,ll,,ʤ,l,,,
 jet,j,,t,ʤ,,t,,
 ladder,l,dd,,l,d,,,
-lion,l,,n,l,,n,Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=303699">Clker-Free-Vector-Images</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=303699">Pixabay</a>,https://cdn.pixabay.com/photo/2014/04/02/10/23/lion-303699_960_720.png
+lion,l,,n,l,,n,"Image by <a href=""https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=303699"">Clker-Free-Vector-Images</a> from <a href=""https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=303699"">Pixabay</a>",https://cdn.pixabay.com/photo/2014/04/02/10/23/lion-303699_960_720.png
 man,m,,n,m,,n,,
 map,m,,p,m,,p,,
 milk,m,,k,m,,k,,
